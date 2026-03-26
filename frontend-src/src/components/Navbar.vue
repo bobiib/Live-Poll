@@ -1,34 +1,35 @@
 <script setup>
+import { i18nState, toggleLang, t } from '../i18n'
 </script>
 
 <template>
   <nav class="navbar">
     <div class="nav-content">
-
       <router-link to="/" class="logo">
         <img src="@/assets/icons/logo.svg" class="logo-img" alt="Logo">
         <span>LivePoll</span>
       </router-link>
 
       <div class="nav-links">
-        <button class="lang-switch">
+        <button @click="toggleLang" class="lang-switch">
           <img src="@/assets/icons/globe.svg" class="icon-xs" alt="Lang">
-          EN
+          {{ i18nState.lang.toUpperCase() }}
         </button>
 
         <router-link to="/login" class="nav-item">
           <img src="@/assets/icons/login.svg" class="icon-sm" alt="Login">
-          <span>Login</span>
+          <span>{{ t.nav.login }}</span>
         </router-link>
 
         <router-link to="/register" class="nav-cta">
           <img src="@/assets/icons/register.svg" class="icon-sm icon-white" alt="Register">
-          <span>Registrieren</span>
+          <span>{{ t.nav.register }}</span>
         </router-link>
       </div>
     </div>
   </nav>
 </template>
+
 
 <style scoped>
 .navbar {

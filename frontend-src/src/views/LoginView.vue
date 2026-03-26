@@ -1,42 +1,31 @@
 <script setup>
-import { ref } from 'vue';
-
-const email = ref('');
-const password = ref('');
-
-const handleLogin = () => {
-  console.log("Login mit:", email.value);
-};
+import { t } from '../i18n'
 </script>
 
 <template>
   <div class="auth-page">
     <div class="auth-card">
-      <h2>Willkommen zurück</h2>
-      <p class="auth-sub">Logge dich ein, um deine Umfragen zu verwalten.</p>
-
-      <form @submit.prevent="handleLogin">
+      <h2>{{ t.login.title }}</h2>
+      <p class="auth-sub">{{ t.login.sub }}</p>
+      <form @submit.prevent>
         <div class="group">
-          <label>E-Mail</label>
+          <label>{{ t.login.email }}</label>
           <div class="in-wrap">
             <img src="@/assets/icons/mail.svg" class="in-icon" alt="@">
-            <input v-model="email" type="email" placeholder="mail@beispiel.ch" />
+            <input type="email" placeholder="mail@beispiel.ch" />
           </div>
         </div>
-
         <div class="group">
-          <label>Passwort</label>
+          <label>{{ t.login.pass }}</label>
           <div class="in-wrap">
             <img src="@/assets/icons/lock.svg" class="in-icon" alt="*">
-            <input v-model="password" type="password" placeholder="••••••••" />
+            <input type="password" placeholder="••••••••" />
           </div>
         </div>
-
-        <button type="submit" class="btn-auth">Einloggen</button>
+        <button type="submit" class="btn-auth">{{ t.login.btn }}</button>
       </form>
-
       <div class="auth-footer">
-        Noch kein Konto? <router-link to="/register">Registrieren</router-link>
+        {{ t.login.footer.split('?')[0] }}? <router-link to="/register">{{ t.login.footer.split('?')[1] }}</router-link>
       </div>
     </div>
   </div>

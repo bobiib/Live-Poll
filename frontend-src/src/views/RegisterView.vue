@@ -1,67 +1,45 @@
 <script setup>
-import { ref } from 'vue';
-
-const username = ref('');
-const email = ref('');
-const password = ref('');
-const passwordConfirm = ref('');
-
-const handleRegister = () => {
-  if (password.value !== passwordConfirm.value) {
-    alert("Passwörter stimmen nicht überein!");
-    return;
-  }
-  console.log("Registrierung für:", username.value, email.value);
-};
+import { t } from '../i18n'
 </script>
 
 <template>
   <div class="auth-page">
     <div class="auth-card">
-      <h2>Account erstellen</h2>
-      <p class="auth-sub">Werde Host und starte deine eigenen Live-Umfragen.</p>
-
-      <form @submit.prevent="handleRegister">
+      <h2>{{ t.register.title }}</h2>
+      <p class="auth-sub">{{ t.register.sub }}</p>
+      <form @submit.prevent>
         <div class="group">
-          <label>Benutzername</label>
+          <label>{{ t.register.user }}</label>
           <div class="in-wrap">
             <img src="@/assets/icons/login.svg" class="in-icon" alt="U">
-            <input v-model="username" type="text" placeholder="z.B. Herr Müller" required />
+            <input type="text" placeholder="Herr Müller" />
           </div>
         </div>
-
         <div class="group">
-          <label>E-Mail Adresse</label>
+          <label>{{ t.register.email }}</label>
           <div class="in-wrap">
             <img src="@/assets/icons/mail.svg" class="in-icon" alt="@">
-            <input v-model="email" type="email" placeholder="mail@beispiel.ch" required />
+            <input type="email" placeholder="mail@beispiel.ch" />
           </div>
         </div>
-
         <div class="group">
-          <label>Passwort</label>
+          <label>{{ t.register.pass }}</label>
           <div class="in-wrap">
             <img src="@/assets/icons/lock.svg" class="in-icon" alt="*">
-            <input v-model="password" type="password" placeholder="••••••••" required />
+            <input type="password" placeholder="••••••••" />
           </div>
         </div>
-
         <div class="group">
-          <label>Passwort bestätigen</label>
+          <label>{{ t.register.passConfirm }}</label>
           <div class="in-wrap">
             <img src="@/assets/icons/shield-check.svg" class="in-icon" alt="S">
-            <input v-model="passwordConfirm" type="password" placeholder="••••••••" required />
+            <input type="password" placeholder="••••••••" />
           </div>
         </div>
-
-        <button type="submit" class="btn-auth">
-          Account erstellen
-          <img src="@/assets/icons/register.svg" class="icon-sm icon-white" alt="+">
-        </button>
+        <button type="submit" class="btn-auth">{{ t.register.btn }}</button>
       </form>
-
       <div class="auth-footer">
-        Bereits ein Konto? <router-link to="/login">Einloggen</router-link>
+        {{ t.register.footer.split('?')[0] }}? <router-link to="/login">{{ t.register.footer.split('?')[1] }}</router-link>
       </div>
     </div>
   </div>

@@ -1,51 +1,31 @@
 <script setup>
-import { ref } from 'vue';
-import { useRouter } from 'vue-router';
-
-const roomCode = ref('');
-const router = useRouter();
-
-const joinRoom = () => {
-  if (roomCode.value.length === 6) {
-    console.log("Join Room:", roomCode.value);
-    // Hier später Routing zur Room-Ansicht
-  }
-};
+import { ref } from 'vue'
+import { t } from '../i18n'
+const roomCode = ref('')
 </script>
 
 <template>
-  <main class="home-hero">
-    <div class="hero-content">
+  <main class="home-page">
+    <div class="content-wrapper">
       <div class="status-badge">
         <img src="@/assets/icons/bolt.svg" class="icon-xs" alt="icon">
-        Systeme online
+        {{ t.home.badge }}
       </div>
-      <h1>Einfache Umfragen für moderne Teams.</h1>
-      <p>Interaktion in Echtzeit. Ohne Installation, ohne Stress.</p>
-
+      <h1>{{ t.home.title }}</h1>
+      <p class="subtitle">{{ t.home.sub }}</p>
       <div class="card">
         <div class="input-wrapper">
           <img src="@/assets/icons/hash.svg" class="input-icon" alt="#">
-          <input
-              v-model="roomCode"
-              type="text"
-              placeholder="Room Code"
-              maxlength="6"
-          />
+          <input v-model="roomCode" type="text" :placeholder="t.home.input" maxlength="6" />
         </div>
-
-        <button @click="joinRoom" class="btn-main">
-          Beitreten
+        <button class="btn-main">
+          {{ t.home.btnJoin }}
           <img src="@/assets/icons/arrow-right.svg" class="icon-sm icon-white" alt=">">
         </button>
-
-        <div class="divider">
-          <span>oder</span>
-        </div>
-
+        <div class="divider"><span>{{ t.home.or }}</span></div>
         <router-link to="/register" class="btn-sub">
           <img src="@/assets/icons/plus-circle.svg" class="icon-sm" alt="+">
-          Eigene Umfrage starten
+          {{ t.home.btnHost }}
         </router-link>
       </div>
     </div>
@@ -53,18 +33,29 @@ const joinRoom = () => {
 </template>
 
 <style scoped>
-.home-hero {
+/* 1. Haupt-Container: Erzwingt volle Breite und Zentrierung */
+.home-page {
   display: flex;
-  justify-content: center;
-  padding: 100px 24px;
+  flex-direction: column;
+  justify-content: center; /* Vertikal zentrieren */
+  align-items: center;     /* Horizontal zentrieren */
+  min-height: calc(100vh - 72px); /* Bildschirmhöhe minus Navbar */
+  width: 100%;             /* Nimmt die volle Breite ein */
+  padding: 40px 24px;
+  overflow: hidden;
 }
 
-.hero-content {
+/* 2. Innerer Wrapper: Hält den Text und die Karte zusammen */
+.content-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Zentriert den Text und die Karte in der Mitte */
   text-align: center;
-  max-width: 640px;
   width: 100%;
+  max-width: 640px;
 }
 
+/* Badge Style */
 .status-badge {
   display: inline-flex;
   align-items: center;
@@ -75,23 +66,26 @@ const joinRoom = () => {
   border-radius: 100px;
   font-size: 0.85rem;
   font-weight: 700;
-  margin-bottom: 32px;
+  margin-bottom: 24px;
 }
 
+/* Typografie */
 h1 {
   font-size: 3.5rem;
   font-weight: 800;
   line-height: 1.1;
   letter-spacing: -0.05em;
   margin-bottom: 20px;
+  color: var(--text-main);
 }
 
-p {
+.subtitle {
   font-size: 1.25rem;
   color: var(--text-muted);
   margin-bottom: 48px;
 }
 
+/* Karte (Card) */
 .card {
   background: var(--secondary);
   padding: 40px;
@@ -101,10 +95,15 @@ p {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  width: 100%;
+  max-width: 440px;
+  text-align: left; /* Damit der Placeholder im Input links bleibt */
 }
 
+/* Input Feld */
 .input-wrapper {
   position: relative;
+  width: 100%;
 }
 
 .input-icon {
@@ -114,6 +113,7 @@ p {
   transform: translateY(-50%);
   width: 22px;
   opacity: 0.4;
+  pointer-events: none;
 }
 
 input {
@@ -124,13 +124,17 @@ input {
   border: 2px solid var(--border);
   border-radius: var(--radius);
   background: #f8fafc;
+  letter-spacing: 2px;
+  transition: all 0.2s ease;
 }
 
 input:focus {
   border-color: var(--primary);
   background: white;
+  outline: none;
 }
 
+/* Buttons */
 .btn-main {
   display: flex;
   align-items: center;
@@ -144,6 +148,7 @@ input:focus {
   border-radius: var(--radius);
   border: none;
   cursor: pointer;
+  transition: all 0.2s ease;
 }
 
 .btn-main:hover {
@@ -165,7 +170,9 @@ input:focus {
   border-bottom: 1px solid var(--border);
 }
 
-.divider span { padding: 0 15px; }
+.divider span {
+  padding: 0 15px;
+}
 
 .btn-sub {
   display: flex;
@@ -178,6 +185,7 @@ input:focus {
   color: var(--text-main);
   font-weight: 700;
   background: white;
+  transition: all 0.2s ease;
 }
 
 .btn-sub:hover {

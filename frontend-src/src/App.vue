@@ -36,6 +36,7 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* Hilfsklassen für Icons */
 .icon-xs { width: 14px; height: 14px; }
 .icon-sm { width: 20px; height: 20px; opacity: 0.7; }
 .icon-white { filter: brightness(0) invert(1); opacity: 1; }
