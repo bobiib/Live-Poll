@@ -1,5 +1,17 @@
 <script setup>
-import { t } from '../i18n'
+import { ref } from 'vue';
+import { useRouter } from 'vue-router'; // <-- Hinzufügen
+import { t } from '../i18n';
+
+const email = ref('');
+const password = ref('');
+const router = useRouter(); // <-- Hinzufügen
+
+const handleLogin = () => {
+  console.log("Login mit:", email.value);
+  // Leitet den User nach dem Login direkt weiter:
+  router.push('/create');
+};
 </script>
 
 <template>

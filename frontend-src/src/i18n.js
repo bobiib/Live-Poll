@@ -29,6 +29,28 @@ const messages = {
             passConfirm: 'Passwort bestätigen',
             btn: 'Account erstellen',
             footer: 'Bereits ein Konto? Einloggen'
+        },
+        room: {
+            waiting: 'Warte auf die Frage...',
+            waitingSub: 'Sobald der Host die Umfrage startet, erscheint sie hier.',
+            submit: 'Absenden',
+            success: 'Vielen Dank!',
+            successSub: 'Deine Antwort wurde erfolgreich übermittelt.',
+            back: 'Zurück zur Startseite'
+        },
+        create: {
+            title: 'Neue Umfrage erstellen',
+            sub: 'Füge Fragen hinzu und starte deine Live-Session.',
+            pollName: 'Name der Umfrage...',
+            qTitle: 'Deine Frage...',
+            typeSingle: 'Single Choice',
+            typeMulti: 'Multiple Choice',
+            typeText: 'Freitext',
+            addOption: 'Option hinzufügen',
+            maxAnswers: 'Max. Antworten pro User',
+            addQuestion: 'Neue Frage hinzufügen',
+            startPoll: 'Umfrage starten',
+            delete: 'Löschen'
         }
     },
     en: {
@@ -59,6 +81,28 @@ const messages = {
             passConfirm: 'Confirm Password',
             btn: 'Create account',
             footer: 'Already have an account? Login'
+        },
+        room: {
+            waiting: 'Waiting for question...',
+            waitingSub: 'As soon as the host starts the poll, it will appear here.',
+            submit: 'Submit',
+            success: 'Thank you!',
+            successSub: 'Your answer has been submitted successfully.',
+            back: 'Back to home'
+        },
+        create: {
+            title: 'Create new poll',
+            sub: 'Add questions and start your live session.',
+            pollName: 'Poll name...',
+            qTitle: 'Your question...',
+            typeSingle: 'Single Choice',
+            typeMulti: 'Multiple Choice',
+            typeText: 'Free Text',
+            addOption: 'Add option',
+            maxAnswers: 'Max answers per user',
+            addQuestion: 'Add new question',
+            startPoll: 'Start Poll',
+            delete: 'Delete'
         }
     }
 }

@@ -20,6 +20,16 @@ const router = createRouter({
             path: '/register',
             name: 'register',
             component: RegisterView
+        },
+        {
+            path: '/room/:id',
+            name: 'participant-room',
+            component: () => import('../views/ParticipantRoomView.vue')
+        },
+        {
+            path: '/create',
+            name: 'host-create',
+            component: () => import('../views/HostCreateView.vue')
         }
     ]
 })

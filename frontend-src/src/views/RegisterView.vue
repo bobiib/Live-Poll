@@ -1,5 +1,23 @@
 <script setup>
-import { t } from '../i18n'
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+import { t } from '../i18n';
+
+const username = ref('');
+const email = ref('');
+const password = ref('');
+const passwordConfirm = ref('');
+const router = useRouter();
+
+const handleRegister = () => {
+  if (password.value !== passwordConfirm.value) {
+    alert("Passwörter stimmen nicht überein!");
+    return;
+  }
+  console.log("Registrierung für:", username.value, email.value);
+
+  router.push('/create');
+};
 </script>
 
 <template>

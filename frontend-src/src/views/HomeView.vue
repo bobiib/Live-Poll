@@ -1,55 +1,84 @@
 <script setup>
-import { ref } from 'vue'
-import { t } from '../i18n'
-const roomCode = ref('')
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+import { t } from '../i18n';
+
+const roomCode = ref('');
+const router = useRouter();
+
+const joinRoom = () => {
+  if (roomCode.value.length === 6) {
+    console.log("Navigiere zu Raum:", roomCode.value);
+    router.push(`/room/${roomCode.value}`);
+  } else {
+    alert("Bitte gib einen gültigen 6-stelligen Code ein.");
+  }
+};
 </script>
 
 <template>
   <main class="home-page">
     <div class="content-wrapper">
+
+      <!-- Status Badge oben -->
       <div class="status-badge">
         <img src="@/assets/icons/bolt.svg" class="icon-xs" alt="icon">
         {{ t.home.badge }}
       </div>
+
+      <!-- Hauptüberschriften -->
       <h1>{{ t.home.title }}</h1>
       <p class="subtitle">{{ t.home.sub }}</p>
+
+      <!-- Die Action Card -->
       <div class="card">
         <div class="input-wrapper">
           <img src="@/assets/icons/hash.svg" class="input-icon" alt="#">
-          <input v-model="roomCode" type="text" :placeholder="t.home.input" maxlength="6" />
+          <input
+              v-model="roomCode"
+              type="text"
+              :placeholder="t.home.input"
+              maxlength="6"
+              @keyup.enter="joinRoom"
+          />
         </div>
-        <button class="btn-main">
+
+        <button @click="joinRoom" class="btn-main">
           {{ t.home.btnJoin }}
           <img src="@/assets/icons/arrow-right.svg" class="icon-sm icon-white" alt=">">
         </button>
-        <div class="divider"><span>{{ t.home.or }}</span></div>
-        <router-link to="/register" class="btn-sub">
+
+        <div class="divider">
+          <span>{{ t.home.or }}</span>
+        </div>
+
+        <router-link to="/create" class="btn-sub">
           <img src="@/assets/icons/plus-circle.svg" class="icon-sm" alt="+">
           {{ t.home.btnHost }}
         </router-link>
       </div>
+
     </div>
   </main>
 </template>
 
 <style scoped>
-/* 1. Haupt-Container: Erzwingt volle Breite und Zentrierung */
+/* 1. Haupt-Container: Zentriert alles perfekt auf dem Screen */
 .home-page {
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Vertikal zentrieren */
-  align-items: center;     /* Horizontal zentrieren */
-  min-height: calc(100vh - 72px); /* Bildschirmhöhe minus Navbar */
-  width: 100%;             /* Nimmt die volle Breite ein */
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 72px); /* Navbar Höhe abziehen */
+  width: 100%;
   padding: 40px 24px;
-  overflow: hidden;
 }
 
-/* 2. Innerer Wrapper: Hält den Text und die Karte zusammen */
+/* 2. Innerer Wrapper für Text und Karte */
 .content-wrapper {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Zentriert den Text und die Karte in der Mitte */
+  align-items: center;
   text-align: center;
   width: 100%;
   max-width: 640px;
@@ -85,7 +114,7 @@ h1 {
   margin-bottom: 48px;
 }
 
-/* Karte (Card) */
+/* Die Karte (Card) */
 .card {
   background: var(--secondary);
   padding: 40px;
@@ -97,10 +126,9 @@ h1 {
   gap: 16px;
   width: 100%;
   max-width: 440px;
-  text-align: left; /* Damit der Placeholder im Input links bleibt */
 }
 
-/* Input Feld */
+/* Input Feld Design */
 .input-wrapper {
   position: relative;
   width: 100%;
@@ -126,15 +154,17 @@ input {
   background: #f8fafc;
   letter-spacing: 2px;
   transition: all 0.2s ease;
+  text-align: left;
 }
 
 input:focus {
   border-color: var(--primary);
   background: white;
   outline: none;
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
 }
 
-/* Buttons */
+/* Primärer Button (Beitreten) */
 .btn-main {
   display: flex;
   align-items: center;
@@ -156,6 +186,11 @@ input:focus {
   transform: translateY(-2px);
 }
 
+.btn-main:active {
+  transform: translateY(0);
+}
+
+/* Trenner (oder) */
 .divider {
   margin: 12px 0;
   display: flex;
@@ -174,6 +209,7 @@ input:focus {
   padding: 0 15px;
 }
 
+/* Sekundärer Button (Hosten) */
 .btn-sub {
   display: flex;
   align-items: center;
@@ -185,6 +221,7 @@ input:focus {
   color: var(--text-main);
   font-weight: 700;
   background: white;
+  text-decoration: none;
   transition: all 0.2s ease;
 }
 
